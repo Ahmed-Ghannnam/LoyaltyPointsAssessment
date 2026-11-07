@@ -6,7 +6,7 @@ LoyaltyPointsAssessment is a .NET 9 ASP.NET Core Web API with two endpoints: `PO
 
 Award identity is `(sourceId, externalTransactionId)`. Matching retries return the original award without updating the balance. Conflicting retries return `409` semantics, and unknown wallets do not consume the identity. The complete award operation is protected by `InMemoryStorage.SyncRoot`.
 
-The controller uses `JsonElement` to require a JSON object and reject invalid token types, malformed input, and decimal points such as `25.0`. Wallet reads return a snapshot under the same lock.
+The API uses a strongly typed `AwardRequest` DTO with Data Annotations for request validation. ASP.NET Core model binding handles malformed JSON and invalid JSON types, while service-level validation enforces the business rules independently.
 
 ## Commands
 
@@ -35,4 +35,8 @@ The tests cover award creation, retries, conflicts, unknown wallets, validation,
 
 State is in memory and is lost on restart. The design supports a single process only; it does not coordinate multiple instances. Authentication and database persistence are intentionally outside the assessment scope.
 
-Approximate time spent was not recorded.
+## Time Spent
+
+The core assignment was completed within the allocated 120-minute time limit.
+
+After completing the core implementation, I made a few additional improvements to simplify request validation and add Swagger/OpenAPI documentation. These changes were made after the allocated time.
